@@ -14,7 +14,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,400&family=Dancing+Script:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Dancing+Script:wght@600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -31,7 +31,7 @@
         padding: 0;
       }
 
-      /* Multi-layer Animated Background */
+      /* Multi-layer Animated Background - The Lovable Pink One */
       body {
         font-family: "Poppins", sans-serif;
         background: linear-gradient(-45deg, #fff0f3, #ffccd5, #ffb3c6, #ff8fa3);
@@ -58,7 +58,7 @@
         }
       }
 
-      /* Glowing Orbs (Deep Background Layer) */
+      /* Glowing Orbs */
       .orbs-container {
         position: fixed;
         top: 0;
@@ -92,7 +92,7 @@
         }
       }
 
-      /* Floating Hearts (Mid Background Layer) */
+      /* Floating Hearts */
       .hearts-container {
         position: fixed;
         top: 0;
@@ -122,13 +122,14 @@
         }
       }
 
-      /* Flying Kisses Base Class */
+      /* Flying Kisses */
       .kiss {
         position: fixed;
         top: 0;
         left: 0;
         z-index: 15000;
         pointer-events: none;
+        font-size: clamp(3rem, 10vw, 5rem);
       }
 
       /* Container Wrappers */
@@ -139,6 +140,7 @@
         max-width: 480px;
       }
 
+      /* Cute Glass Card */
       .card {
         position: relative;
         background: var(--glass);
@@ -210,7 +212,7 @@
       }
 
       .primary {
-        background: linear-gradient(135deg, #ff4d6d, #d90429);
+        background: var(--accent);
         color: white;
         box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
         z-index: 10;
@@ -331,7 +333,7 @@
         line-height: 1.6;
       }
 
-      /* Deeply Sentimental Love Letter Styling */
+      /* The Lovable & Elegant Love Letter Styling */
       .love-letter {
         background: linear-gradient(
           135deg,
@@ -353,21 +355,74 @@
         font-size: 0.95rem;
         line-height: 1.8;
         color: #333;
-        margin-bottom: 18px;
+        margin-bottom: 20px;
+        opacity: 0; /* Hidden for animation */
       }
 
-      .love-letter p:last-child {
-        margin-bottom: 0;
-        font-family: "Dancing Script", cursive;
-        font-size: 1.6rem;
+      /* Staggered Animation for reading flow */
+      .animate-letter p {
+        animation: floatTextUp 1.2s ease forwards;
+      }
+
+      @keyframes floatTextUp {
+        0% {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-letter p:nth-child(1) {
+        animation-delay: 0.5s;
+      }
+      .animate-letter p:nth-child(2) {
+        animation-delay: 3.5s;
+      }
+      .animate-letter p:nth-child(3) {
+        animation-delay: 6.5s;
+      }
+      .animate-letter p:nth-child(4) {
+        animation-delay: 10s;
+      }
+      .animate-letter p:nth-child(5) {
+        animation-delay: 14s;
+      }
+      .animate-letter p:nth-child(6) {
+        animation-delay: 16s;
         text-align: center;
-        color: var(--accent);
-        margin-top: 25px;
       }
 
-      .highlight {
-        font-weight: 600;
+      /* Bold & Attractive Highlights */
+      .love-letter strong {
         color: var(--accent);
+        font-weight: 700;
+      }
+
+      .love-letter em {
+        color: #4a4a4a;
+        font-weight: 600;
+        font-style: italic;
+      }
+
+      .vow-highlight {
+        display: block;
+        font-family: "Dancing Script", cursive;
+        font-size: 1.8rem;
+        color: var(--accent);
+        text-align: center;
+        margin: 15px 0;
+        font-weight: 700;
+        text-shadow: 1px 1px 3px rgba(255, 77, 109, 0.2);
+      }
+
+      .forever-sparkle {
+        font-family: "Dancing Script", cursive;
+        font-size: 1.8rem;
+        color: var(--accent);
+        font-weight: 700;
       }
 
       /* Memories Slider for Portrait Photos */
@@ -450,54 +505,71 @@
 
         <div class="heart-divider">❤️</div>
 
-        <div class="love-letter">
+        <div class="love-letter" id="the-letter">
           <p>
-            Kunnu, when I look into your eyes, I don’t just see the woman I
-            love; I see my family, my peace, and my absolute forever. You are my
-            wife in my heart already. Life is not just about finding someone to
-            survive with; it’s about choosing a partner to build an unbreakable
-            empire with.
+            Kunnu, people often mistake a long history for destiny, but
+            <strong
+              ><em
+                >true security comes from absolute, undivided loyalty.</em
+              ></strong
+            >
+            To build a sanctuary strong enough for a lifetime, we cannot leave
+            any windows open to the past. I want to protect your peace fiercely,
+            and to do that,
+            <strong>we must close the doors behind us forever.</strong> No
+            lingering ties, no divided energy. It is time to let go of the heavy
+            anchors of yesterday.
           </p>
+
           <p>
-            Marriage is the beautiful, raw reality of choosing each other every
-            single day. We will inevitably face storms in our future—financial
-            pressures, family expectations, and the heavy burdens of life. But I
-            promise you this: it will never be you against me. It will always be
-            <span class="highlight">us against the problem</span>. We will sit
-            down, hold hands, and figure it out together. When one of us is
-            weak, the other will carry the weight.
+            Because when I look into your eyes today, I don’t just see the woman
+            I love;
+            <strong>I see my family, my peace, and my absolute forever.</strong>
+            You are already my wife in my heart. But right now, in this exact
+            moment, I am asking you to take my hand and start building a real,
+            unbreakable life with me.
           </p>
+
           <p>
-            I know there will be days when frustration takes over, when anger
-            clouds our vision and we forget how to speak each other's language.
-            Whenever you feel that anger rising, I want you to read this letter.
-            Remember that my love for you does not shake in the storm. I will
-            not walk away; I will look past the temper to see the heart that
-            just wants to be understood. I only ask that in return, you take a
-            breath, look into my eyes, and remember that I am always on your
-            side. Let our love always be louder than our anger. Let patience be
-            our absolute discipline.
+            As we step into our tomorrow, I want us to truly understand the
+            meaning of this commitment. Marriage isn't a flawless fairy tale; it
+            is the
+            <strong
+              >beautiful, gritty reality of choosing each other every single
+              day.</strong
+            >
+            We will inevitably face storms together—financial stresses, family
+            pressures, the weight of responsibilities, and our own personal
+            struggles.
           </p>
+
           <p>
-            To protect this sacred space we are building, we must lock the doors
-            to the past forever. People often mistake a long history for
-            destiny, but mere survival in the past is not the same as a
-            thriving, secure future. A true marriage is forged in
-            <span class="highlight"
-              >absolute loyalty, intentional discipline, and the quiet
-              boundaries we set to protect our home</span
-            >. No divided energy, no lingering ties, no open windows to old
-            chapters.
+            There will be days when we clash. There will be times when anger
+            speaks louder than patience, and when ego tries to build walls
+            between us. Let’s make a vow right now for all the years ahead:
+            <strong
+              >in those moments, we will choose empathy over winning.</strong
+            >
+            Even when we are furious, we will speak with respect. We will never
+            let a temporary fight make us forget our permanent love. Our
+            expectations of each other won't be based on perfection, but on
+            <em>relentless effort.</em> We will always remember that it is never
+            you against me—it is always:<br />
+            <span class="vow-highlight">you and me against the problem.</span>
+            When life gets heavy, we will share the load so neither of us
+            breaks.
           </p>
+
           <p>
-            I am offering you a foundation so solid that you can finally rest.
-            Let go of the heavy anchors of yesterday. Take my hand, step
-            completely into the brilliant light of our tomorrow, and let's build
-            this life. I am ready to be your absolute everything, your provider,
-            your protector, and your greatest peace. I am asking you to choose
-            me, fully and forever, as your only.
+            Trust in this foundation we are building. Step completely into the
+            brilliant light of our future.
+            <strong
+              >I am ready to be your absolute everything, and I am asking you to
+              choose me, fully and forever, as your only.</strong
+            >
           </p>
-          <p>We are meant to be. ✨</p>
+
+          <p><span class="forever-sparkle">We are meant to be. ✨</span></p>
         </div>
 
         <div class="heart-divider">❤️</div>
@@ -536,12 +608,11 @@
         }
       }
 
-      /* --- 2. Floating Background Elements (Hearts & Orbs) --- */
+      /* --- 2. Floating Background Elements --- */
       function createBackground() {
         const heartsContainer = document.getElementById("hearts");
         const orbsContainer = document.getElementById("orbs");
 
-        // Hearts
         for (let j = 0; j < 15; j++) {
           const heart = document.createElement("div");
           heart.classList.add("heart");
@@ -553,7 +624,6 @@
           heartsContainer.appendChild(heart);
         }
 
-        // Glowing Orbs
         for (let k = 0; k < 8; k++) {
           const orb = document.createElement("div");
           orb.classList.add("orb");
@@ -618,11 +688,7 @@
               opacity: 0,
             },
           ],
-          {
-            duration: duration,
-            easing: "ease-in-out",
-            fill: "forwards",
-          },
+          { duration: duration, easing: "ease-in-out", fill: "forwards" },
         );
 
         setTimeout(() => {
@@ -690,13 +756,16 @@
       /* --- 6. YES Button & Celebration Logic --- */
       const proposalScreen = document.getElementById("proposal-screen");
       const celebrationScreen = document.getElementById("celebration-screen");
+      const theLetter = document.getElementById("the-letter");
 
       yesBtn.addEventListener("click", () => {
         proposalScreen.classList.add("hidden");
         celebrationScreen.classList.remove("hidden");
 
-        startSlider();
+        // Trigger the cascading text animation
+        theLetter.classList.add("animate-letter");
 
+        startSlider();
         setInterval(spawnKiss, 4000);
 
         const duration = 15 * 1000;
