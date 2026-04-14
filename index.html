@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>For My Forever ❤️</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;1,400&family=Dancing+Script:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --accent: #ff4d6d;
+        --glass: rgba(255, 255, 255, 0.85);
+        --glass-border: rgba(255, 255, 255, 0.5);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Multi-layer Animated Background */
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(-45deg, #fff0f3, #ffccd5, #ffb3c6, #ff8fa3);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        min-height: 100vh;
+        width: 100vw;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+      }
+
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Glowing Orbs (Deep Background Layer) */
+      .orbs-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.8) 0%,
+          rgba(255, 255, 255, 0) 70%
+        );
+        opacity: 0.5;
+        animation: floatOrb 10s ease-in-out infinite alternate;
+      }
+
+      @keyframes floatOrb {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 0.3;
+        }
+        100% {
+          transform: translateY(-50px) scale(1.2);
+          opacity: 0.6;
+        }
+      }
+
+      /* Floating Hearts (Mid Background Layer) */
+      .hearts-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .heart {
+        position: absolute;
+        color: var(--accent);
+        opacity: 0.6;
+        animation: floatUp linear infinite;
+        filter: drop-shadow(0 0 5px rgba(255, 77, 109, 0.3));
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(100vh) scale(0) rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-10vh) scale(1.5) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* Flying Kisses Base Class */
+      .kiss {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 15000;
+        pointer-events: none;
+      }
+
+      /* Container Wrappers */
+      .main-wrapper,
+      .success-wrapper {
+        z-index: 1;
+        width: 100%;
+        max-width: 480px;
+      }
+
+      .card {
+        position: relative;
+        background: var(--glass);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        box-shadow:
+          0 20px 40px rgba(255, 77, 109, 0.15),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .title {
+        color: var(--accent);
+        font-size: clamp(1.4rem, 6vw, 1.8rem);
+        margin-bottom: 10px;
+        line-height: 1.3;
+        font-weight: 600;
+      }
+
+      .emotional-line {
+        margin: 10px 0;
+        font-style: italic;
+        color: #555;
+        font-size: clamp(0.9rem, 4vw, 1rem);
+        min-height: 45px;
+      }
+
+      .media-section img {
+        width: 100%;
+        max-width: 280px;
+        border-radius: 15px;
+        margin: 10px auto;
+        display: block;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .media-section h6 {
+        margin-top: 12px;
+        color: #666;
+        font-size: 0.95rem;
+        font-weight: 400;
+      }
+
+      /* Action Area (Buttons) */
+      .action-area {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        min-height: 50px;
+      }
+
+      .btn {
+        padding: 12px 28px;
+        border: none;
+        border-radius: 50px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        outline: none;
+        letter-spacing: 0.5px;
+      }
+
+      .primary {
+        background: linear-gradient(135deg, #ff4d6d, #d90429);
+        color: white;
+        box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        z-index: 10;
+      }
+
+      .secondary {
+        background: #f0f0f0;
+        color: #666;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition:
+          top 0.3s ease-out,
+          left 0.3s ease-out,
+          background 0.3s;
+        z-index: 9999 !important;
+      }
+
+      .pulse-animation {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.7);
+        }
+        70% {
+          transform: scale(1.05);
+          box-shadow: 0 0 0 15px rgba(255, 77, 109, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(255, 77, 109, 0);
+        }
+      }
+
+      /* Celebration / Memories Screen */
+      .success-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .success-wrapper h1 {
+        font-family: "Dancing Script", cursive;
+        color: var(--accent);
+        font-size: clamp(2.5rem, 8vw, 3.5rem);
+        margin-bottom: 5px;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.2);
+      }
+
+      .success-wrapper p.subtitle {
+        color: #555;
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      /* Elegant Pulsing Heart Divider */
+      .heart-divider {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        margin: 25px 0;
+        color: var(--accent);
+        font-size: 1.5rem;
+        animation: softPulse 2s infinite alternate;
+      }
+
+      @keyframes softPulse {
+        0% {
+          transform: scale(0.95);
+          text-shadow: 0 0 5px rgba(255, 77, 109, 0.3);
+        }
+        100% {
+          transform: scale(1.1);
+          text-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+        }
+      }
+
+      .heart-divider::before,
+      .heart-divider::after {
+        content: "";
+        flex: 1;
+        border-bottom: 2px dashed rgba(255, 77, 109, 0.4);
+      }
+
+      .heart-divider::before {
+        margin-right: 15px;
+      }
+      .heart-divider::after {
+        margin-left: 15px;
+      }
+
+      .journey-title {
+        font-family: "Dancing Script", cursive;
+        color: var(--accent);
+        font-size: 2.2rem;
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
+
+      .journey-subtitle {
+        color: #4a4a4a;
+        font-size: 1.05rem;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .journey-footer {
+        color: var(--accent);
+        font-size: 1.1rem;
+        margin-top: 25px;
+        font-weight: 600;
+        font-style: italic;
+        line-height: 1.6;
+      }
+
+      /* Deeply Sentimental Love Letter Styling */
+      .love-letter {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.9),
+          rgba(255, 240, 243, 0.8)
+        );
+        border: 1px solid rgba(255, 77, 109, 0.3);
+        border-radius: 18px;
+        padding: 30px 20px;
+        box-shadow:
+          0 4px 15px rgba(0, 0, 0, 0.05),
+          inset 0 2px 10px rgba(255, 255, 255, 0.8);
+        margin: 20px 0;
+        text-align: left;
+        position: relative;
+      }
+
+      .love-letter p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        color: #333;
+        margin-bottom: 18px;
+      }
+
+      .love-letter p:last-child {
+        margin-bottom: 0;
+        font-family: "Dancing Script", cursive;
+        font-size: 1.6rem;
+        text-align: center;
+        color: var(--accent);
+        margin-top: 25px;
+      }
+
+      .highlight {
+        font-weight: 600;
+        color: var(--accent);
+      }
+
+      /* Memories Slider for Portrait Photos */
+      .slider-container {
+        height: 400px;
+        width: 100%;
+        border-radius: 15px;
+        overflow: hidden;
+        margin: 10px 0;
+        position: relative;
+        background: #ffe3e8;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 20%;
+        opacity: 0;
+        transform: scale(1.15) rotate(2deg);
+        transition:
+          opacity 2.5s ease-in-out,
+          transform 5.5s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      .slide.active {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+
+      .hidden {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="orbs-container" id="orbs"></div>
+    <div class="hearts-container" id="hearts"></div>
+
+    <main class="main-wrapper" id="proposal-screen">
+      <section class="card animate__animated animate__zoomIn">
+        <h1 class="title">Bacchu, will you marry me? 💍</h1>
+
+        <div class="emotional-line"><p id="typing-text"></p></div>
+
+        <div class="media-section">
+          <img id="status-gif" src="assets/mem01.jpg" alt="Hands Holding" />
+          <h6>In your hands… I found my forever ❤️</h6>
+        </div>
+
+        <div class="action-area" id="action-area">
+          <button id="yes-btn" class="btn primary pulse-animation">
+            YES! ❤️
+          </button>
+          <button id="no-btn" class="btn secondary">No</button>
+        </div>
+      </section>
+    </main>
+
+    <main
+      id="celebration-screen"
+      class="success-wrapper hidden animate__animated animate__fadeInUp"
+    >
+      <h1>Welcome Home, My Wife. 💍</h1>
+      <h1>Ours. Completely and Forever. ✨</h1>
+      <p class="subtitle">My heart is officially yours, Bacchuu.</p>
+
+      <div class="card">
+        <h3 class="journey-title">Our Journey</h3>
+
+        <div class="media-section">
+          <p class="journey-subtitle">
+            From our very first unexpected capture...
+          </p>
+          <img src="assets/mem02.jpg" alt="First Capture" />
+        </div>
+
+        <div class="heart-divider">❤️</div>
+
+        <div class="love-letter">
+          <p>
+            Kunnu, when I look into your eyes, I don’t just see the woman I
+            love; I see my family, my peace, and my absolute forever. You are my
+            wife in my heart already.
+          </p>
+          <p>
+            I know that walking away from familiar history takes courage. People
+            often mistake a long history for destiny. But mere survival in the
+            past is not the same as a beautiful, thriving future. I am not here
+            to compete with shadows, nor do I want to be just another person who
+            'stands by you.' I want to be the man who elevates you, who fiercely
+            protects your peace, and who gives you a love so profound, so
+            secure, that you never even feel the urge to look behind you again.
+          </p>
+          <p>
+            I will bare my soul to you: my heart guards us fiercely because what
+            we have is sacred. A marriage that lasts a lifetime isn't built
+            solely on romance; it is forged in
+            <span class="highlight"
+              >absolute loyalty, intentional discipline, and the quiet
+              boundaries we set to protect our home</span
+            >.
+          </p>
+          <p>
+            I want us to be completely, intensely devoted to each other. No
+            divided energy, no lingering ties, no open windows to old chapters.
+            I am offering you a foundation so solid that you can finally rest.
+            Let go of the heavy anchors of yesterday. Take my hand, step
+            completely into the brilliant light of our tomorrow, and let's build
+            an empire together.
+          </p>
+          <p>
+            I am ready to be your absolute everything. I am asking you to choose
+            me, fully and forever, as your only.
+          </p>
+          <p>We are meant to be. ✨</p>
+        </div>
+
+        <div class="heart-divider">❤️</div>
+
+        <p class="journey-subtitle">
+          To this very moment, and the millions of beautiful memories we are
+          going to create...
+        </p>
+
+        <div class="slider-container">
+          <div class="slider">
+            <img src="assets/mem03.jpeg" class="slide active" alt="Memory 1" />
+            <img src="assets/mem04.jpeg" class="slide" alt="Memory 2" />
+            <img src="assets/mem05.jpeg" class="slide" alt="Memory 3" />
+          </div>
+        </div>
+
+        <p class="journey-footer">
+          In this life and every single one that follows, my soul will always
+          choose yours.<br />
+          I will love you fiercely and faithfully, my Bacchuu. ❤️
+        </p>
+      </div>
+    </main>
+
+    <script>
+      /* --- 1. Typing Effect --- */
+      const text =
+        "Among the billions in this world, my heart chose you, and it chooses you every single day... ❤️";
+      let i = 0;
+      function typeWriter() {
+        if (i < text.length) {
+          document.getElementById("typing-text").innerHTML += text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50);
+        }
+      }
+
+      /* --- 2. Floating Background Elements (Hearts & Orbs) --- */
+      function createBackground() {
+        const heartsContainer = document.getElementById("hearts");
+        const orbsContainer = document.getElementById("orbs");
+
+        // Hearts
+        for (let j = 0; j < 15; j++) {
+          const heart = document.createElement("div");
+          heart.classList.add("heart");
+          heart.innerHTML = "❤️";
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.animationDelay = Math.random() * 5 + "s";
+          heart.style.animationDuration = Math.random() * 4 + 4 + "s";
+          heart.style.fontSize = Math.random() * 15 + 10 + "px";
+          heartsContainer.appendChild(heart);
+        }
+
+        // Glowing Orbs
+        for (let k = 0; k < 8; k++) {
+          const orb = document.createElement("div");
+          orb.classList.add("orb");
+          const size = Math.random() * 100 + 50 + "px";
+          orb.style.width = size;
+          orb.style.height = size;
+          orb.style.left = Math.random() * 100 + "vw";
+          orb.style.top = Math.random() * 100 + "vh";
+          orb.style.animationDelay = Math.random() * 5 + "s";
+          orb.style.animationDuration = Math.random() * 5 + 8 + "s";
+          orbsContainer.appendChild(orb);
+        }
+      }
+
+      window.onload = () => {
+        setTimeout(typeWriter, 500);
+        createBackground();
+      };
+
+      /* --- 3. Slider Logic --- */
+      const slides = document.querySelectorAll(".slide");
+      let currentSlide = 0;
+      let sliderInterval;
+
+      function startSlider() {
+        if (slides.length > 0) {
+          sliderInterval = setInterval(() => {
+            slides[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add("active");
+          }, 4500);
+        }
+      }
+
+      /* --- 4. ADVANCED Flying Kisses Logic --- */
+      function spawnKiss() {
+        const kiss = document.createElement("div");
+        kiss.classList.add("kiss");
+        kiss.innerHTML = "💋";
+        document.body.appendChild(kiss);
+
+        const startX = Math.random() * 120 - 10 + "vw";
+        const endX = Math.random() * 120 - 10 + "vw";
+        const startY = "110vh";
+        const endY = "-10vh";
+
+        const duration = Math.random() * 3000 + 4000;
+        const scaleStart = Math.random() * 0.5 + 0.5;
+        const scaleEnd = Math.random() * 1.5 + 1.5;
+        const rotation = Math.random() * 60 - 30;
+
+        kiss.animate(
+          [
+            {
+              transform: `translate(${startX}, ${startY}) scale(${scaleStart}) rotate(${rotation}deg)`,
+              opacity: 0,
+            },
+            { opacity: 0.8, offset: 0.2 },
+            { opacity: 0.8, offset: 0.8 },
+            {
+              transform: `translate(${endX}, ${endY}) scale(${scaleEnd}) rotate(${rotation * 2}deg)`,
+              opacity: 0,
+            },
+          ],
+          {
+            duration: duration,
+            easing: "ease-in-out",
+            fill: "forwards",
+          },
+        );
+
+        setTimeout(() => {
+          kiss.remove();
+        }, duration);
+      }
+
+      /* --- 5. The Evasive "No" Button --- */
+      const noBtn = document.getElementById("no-btn");
+      const yesBtn = document.getElementById("yes-btn");
+
+      let escapeCount = 0;
+      const MAX_TRIES = 15;
+
+      const teaseMessages = [
+        "Are you sure?",
+        "Missed me! ❤️",
+        "Nope!",
+        "Try harder!",
+        "Forever?",
+        "Getting tired?",
+        "Just say YES!",
+      ];
+
+      function moveNoButton(e) {
+        if (e) e.preventDefault();
+
+        escapeCount++;
+
+        if (escapeCount >= MAX_TRIES) {
+          yesBtn.click();
+          return;
+        }
+
+        if (escapeCount % 2 === 0) {
+          noBtn.innerText =
+            teaseMessages[Math.floor(Math.random() * teaseMessages.length)];
+          noBtn.style.background = "#ffccd5";
+          noBtn.style.color = "#d90429";
+        } else {
+          noBtn.style.background = "#f0f0f0";
+          noBtn.style.color = "#666";
+        }
+
+        const card = document.querySelector("#proposal-screen .card");
+        const padding = 20;
+
+        const minX = padding;
+        const maxX = card.clientWidth - noBtn.offsetWidth - padding;
+        const minY = padding;
+        const maxY = card.clientHeight - noBtn.offsetHeight - padding;
+
+        const randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+        const randomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+
+        noBtn.style.position = "absolute";
+        noBtn.style.left = `${randomX}px`;
+        noBtn.style.top = `${randomY}px`;
+      }
+
+      noBtn.addEventListener("mouseover", moveNoButton);
+      noBtn.addEventListener("touchstart", moveNoButton, { passive: false });
+      noBtn.addEventListener("click", moveNoButton);
+
+      /* --- 6. YES Button & Celebration Logic --- */
+      const proposalScreen = document.getElementById("proposal-screen");
+      const celebrationScreen = document.getElementById("celebration-screen");
+
+      yesBtn.addEventListener("click", () => {
+        proposalScreen.classList.add("hidden");
+        celebrationScreen.classList.remove("hidden");
+
+        startSlider();
+
+        // Spawns kisses every 4 seconds
+        setInterval(spawnKiss, 4000);
+
+        const duration = 15 * 1000;
+        const animationEnd = Date.now() + duration;
+        const defaults = {
+          startVelocity: 30,
+          spread: 360,
+          ticks: 60,
+          zIndex: 11000,
+        };
+
+        const interval = setInterval(function () {
+          const timeLeft = animationEnd - Date.now();
+          if (timeLeft <= 0) return clearInterval(interval);
+          const particleCount = 50 * (timeLeft / duration);
+          confetti(
+            Object.assign({}, defaults, {
+              particleCount,
+              origin: { x: Math.random(), y: Math.random() - 0.2 },
+            }),
+          );
+        }, 250);
+      });
+    </script>
+  </body>
+</html>
